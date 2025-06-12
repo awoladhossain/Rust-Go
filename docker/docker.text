@@ -1,0 +1,45 @@
+1. docker pull is a command used to download a Docker image from a remote registry (like Docker Hub) to your local machine. This allows you to use that image to create containers without building the image yourself.
+```
+docker pull node:18
+```
+2. A Docker image is a lightweight, standalone, and executable package that includes everything needed to run a piece of software: the code, runtime, libraries, environment variables, and configuration files.
+
+
+3. To check which Docker images you have on your local machine, you should use:
+```
+docker image ls or docker image
+```
+
+4. TAG means version
+
+5. A Docker container is a running instance of a Docker image. It is an isolated environment that contains everything needed to run your application, including the code, runtime, libraries, and dependencies... like In oop (Class->object)
+
+to create docker container: docker run <name of the repository>
+
+
+6. docker run -it ubuntu ... he flags -it mean:
+
+-i (or --interactive): Keeps STDIN open so you can interact with the container.
+-t (or --tty): Allocates a pseudo-TTY (terminal), so you get a command-line interface.
+Together, -it allows you to run the container in interactive mode, so you can type commands directly into the Ubuntu shell inside the container. This is commonly used for debugging or exploring the container environment
+
+7. docker ps -a means "list all Docker containers on your system," including both running and stopped containers.
+docker ps by itself shows only running containers.
+The -a (or --all) flag shows all containers, regardless of their state (running, stopped, or exited).
+
+
+8. docker start <CONTAINER ID> or <name>
+9. docker stop <CONTAINER ID> or <name>
+
+10. to remove any kinds of image from docker use the cmd: docker rmi Image_Name and to remove container docker rm Container_Name or ID
+if you wants to remove an image if check you used it as a container if you used then first remove the container then the image
+
+11. If you wants to pull the specific version  use the cmd
+```
+docker pull mysql:8
+```
+otherwise it will pull the latest version
+
+
+
+12. docker run -d Image_Name : -d (or --detach): Runs the container in the background and prints the container ID.
