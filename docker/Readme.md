@@ -116,13 +116,13 @@ You can run a specific version of MySQL (like 8.0) in a detached container with 
 docker run -d -e MYSQL_ROOT_PASSWORD=secret --name mysql-older mysql:8.0
 ```
 
--`-d`: Runs the container in detached (background) mode.
+- `-d`: Runs the container in detached (background) mode.
 
--`-e`: MYSQL_ROOT_PASSWORD=secret: Sets the root password to secret inside the MySQL container.
+- `-e`: MYSQL_ROOT_PASSWORD=secret: Sets the root password to secret inside the MySQL container.
 
--`--name mysql-older`: Assigns the name mysql-older to the container for easier reference.
+- `--name mysql-older`: Assigns the name mysql-older to the container for easier reference.
 
--`mysql:8.0`: Specifies the image and version of MySQL to use.
+- `mysql:8.0`: Specifies the image and version of MySQL to use.
 
 ## 15. Port Binding
 
@@ -132,11 +132,85 @@ Port binding allows you to map a port on your local machine to a port inside the
 docker run -d -p 8080:80 nginx
 ```
 
--`-d`: Runs the container in detached mode (in the background).
+- `-d`: Runs the container in detached mode (in the background).
 
--`-p 8080:80`: Maps port 80 inside the container (used by Nginx) to port 8080 on your local machine.
+- `-p 8080:80`: Maps port 80 inside the container (used by Nginx) to port 8080 on your local machine.
 
--`nginx`: The Docker image used (latest version by default).
+- `nginx`: The Docker image used (latest version by default).
 
 This command starts an Nginx container in the background and makes it accessible at http://localhost:8080 on your browser.
 like 8080--host port and 80 is container self port.. mapping porcess is called port binding
+
+
+## container Id
+To find out which port a Docker image (like MySQL) exposes by default, you can:
+```sh
+docker image inspect mysql
+```
+Output:
+```sh
+ "ExposedPorts": {
+    "3306/tcp": {}
+}
+```
+
+## 16. TroubleShoot CMD
+This command shows the logs (output) from a running or stopped container.
+```sh
+docker logs <CONTAINER_ID or name>
+```
+```sh
+docker exec -it <container_id or name> /bin/bash or /bin/sh
+```
+docker exec: Runs a command inside a running container.
+-i: Keeps STDIN open (interactive).
+-t: Allocates a pseudo-TTY (terminal).
+<container_id or name>: The ID or name of the running container.
+/bin/bash: The command to run (starts a Bash shell).
+*** you can type and run any commands supported by the container’s operating system, just like you would in a regular terminal.
+
+
+## 17. Docker Networks
+
+Docker networks allow containers to communicate with each other and with the outside world. By default, Docker creates a bridge network, but you can create custom networks for better isolation and control.
+
+- To list all networks:
+
+  ```sh
+  docker network ls
+  ```
+
+- To create a new network:
+
+  ```sh
+  docker network create my-network
+  ```
+
+- To run a container attached to a specific network:
+
+  ```sh
+  docker run -d --network my-network --name my-container nginx
+  ```
+
+- To connect an existing container to a network:
+
+  ```sh
+  docker network connect my-network my-container
+  ```
+
+Custom networks are useful when you want multiple containers to communicate securely and directly with each other.
+
+## Difference Between Docker and Virtual Machines (VMs)
+
+| Feature                | Docker (Containers)                                   | Virtual Machines (VMs)                        |
+|------------------------|------------------------------------------------------|-----------------------------------------------|
+| Virtualization Level   | OS-level virtualization                              | Hardware-level virtualization                 |
+| Resource Usage         | Lightweight, shares host OS kernel                   | Heavyweight, each VM runs its own OS          |
+| Startup Time           | Seconds                                              | Minutes                                       |
+| Isolation              | Process-level isolation                              | Full OS isolation                             |
+| Performance            | Near-native                                          | Slightly lower due to hypervisor overhead     |
+| Portability            | Highly portable (runs anywhere Docker is supported)  | Less portable (depends on hypervisor/OS)      |
+| Use Case               | Microservices, CI/CD, rapid deployment               | Running different OSes, legacy applications   |
+
+**Summary:**
+Docker containers are more lightweight and faster to start than VMs, as they share the host OS kernel. VMs provide stronger isolation by virtualizing hardware and running separate OS instances, but at the cost of higher resource usage and slower performance.

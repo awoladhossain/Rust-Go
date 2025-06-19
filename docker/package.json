@@ -1,0 +1,21 @@
+{
+  "name": "docker",
+  "version": "1.0.0",
+  "description": "`docker pull` is used to download a Docker image from a remote registry (like Docker Hub) to your local machine. This allows you to use that image to create containers without building the image yourself.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "mongoose": "^8.16.0",
+    "nodemon": "^3.1.10"
+  }
+}
