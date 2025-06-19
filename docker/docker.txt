@@ -41,5 +41,4 @@ docker pull mysql:8
 otherwise it will pull the latest version
 
 
-
 12. docker run -d Image_Name : -d (or --detach): Runs the container in the background and prints the container ID.
